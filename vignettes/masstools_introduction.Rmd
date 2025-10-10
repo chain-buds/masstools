@@ -28,15 +28,16 @@ knitr::opts_chunk$set(
 
 # **Introduction**
 
-`masstools` is a comprehensive R package that provides a collection of useful tools for mass spectrometry data processing and analysis. As an integral component of the `tidymass` ecosystem, `masstools` serves as a foundational package that offers essential utilities for metabolomics and mass spectrometry workflows. The package encompasses a wide range of functionality designed to support various aspects of mass spectrometry data analysis, including tandem mass spectrometry (MS2) matching, dot product calculations, and other fundamental operations. masstools provides researchers and analysts with reliable, well-tested tools for handling complex mass spectrometry datasets.
+`masstools` is a lightweight, dependency-conscious R package that provides core utilities for mass-spectrometry and metabolomics workflows. As part of the [`tidymass` ecosystem](https://www.tidymass.org/), it complements Bioconductor infrastructure (e.g., `Spectra`, `MSnbase`) by offering optimized, reusable building blocks for routine tasks such as data parsing, spectral similarity, and identifier conversion—helping bridge the gap between low-level data structures and applied analyses.
 
-The package includes specialized functions for: - Spectral similarity calculations and MS2 matching - Chemical formula processing - Mass spectrometry data file reading and manipulation - Data visualization tools for mass spectra
+**Key functionality includes:**
 
-Developed primarily by Xiaotao Shen and contributors, `masstools` is designed to work seamlessly with modern R workflows and integrates well with other packages in the `tidymass` ecosystem, making it an essential tool for anyone working with mass spectrometry data in R.And `masstools` is a part of [`tidymass` project](https://www.tidymass.org/).
+-   **Spectral similarity & MS2 matching:** dot product and related metrics for tandem MS comparisons.
+-   **Chemical utilities:** helpers for formula/identifier processing and conversions.
+-   **I/O helpers:** convenient tools for reading, inspecting, and manipulating MS data.
+-   **Visualization aids:** simple plotting utilities for spectra and related results.
 
-# **Motivation for Inclusion in Bioconductor**
-
-The inclusion of masstools in Bioconductor is motivated by the need for a lightweight, dependency-conscious utility package that addresses common tasks in metabolomics and untargeted MS pipelines. It helps bridge gaps between core infrastructure packages (e.g., Spectra, MSnbase) and applied workflows by providing optimized, reusable building blocks for data parsing, similarity computation, and identifier conversion.
+Developed by Xiaotao Shen and contributors, `masstools` is designed to slot into modern R workflows and integrate smoothly with other `tidymass` and Bioconductor packages. Its focus on small, stable utilities and minimal dependencies makes it a reliable foundation for reproducible mass-spectrometry analyses in R.
 
 # **Comparison to Related Bioconductor Packages**
 
@@ -47,8 +48,6 @@ The inclusion of masstools in Bioconductor is motivated by the need for a lightw
 -   `ProtGenerics`: Used internally to align with Bioconductor’s S4 generic interface, though `masstools` primarily operates using S3 methods and functional programming paradigms. Future compatibility with Bioconductor S4 classes is planned and partially supported through its flexible function design.
 
 -   `MSnbase`: While not directly dependent on `MSnbase`, users often pair `MSnbase's` data structure and raw data access with `masstools` utilities for data exploration and spectral annotation, e.g., using MSnExp with `get_spectra_match_score()` or `ms2_plot()`.
-
-- []
 
 # **Chemical formula operation**
 
@@ -117,8 +116,7 @@ lib.spectrum <- data.frame(mz = 1:10, intensity = 1:10)
 getSpectraMatchScore(exp.spectrum, lib.spectrum)
 ```
 
-MS2 plot and MS2 matching plot.
-The `ms2_plot()` function is designed to visualize one or two MS2 spectra, enabling side-by-side comparison. This is useful in spectral library matching, experimental result inspection, or quality control.
+MS2 plot and MS2 matching plot. The `ms2_plot()` function is designed to visualize one or two MS2 spectra, enabling side-by-side comparison. This is useful in spectral library matching, experimental result inspection, or quality control.
 
 Here, we simulate two identical MS2 spectra and demonstrate how the function can be used for both single-spectrum display and comparative visualization.
 
@@ -159,8 +157,7 @@ ms2_plot(spectrum1)
 
 # **Match two feature tables**
 
-We can match two feature tables according to mz and retention time.
-In LC-MS-based metabolomics or proteomics, features (i.e., detected signals) are typically characterized by mass-to-charge ratio (m/z) and retention time (RT). Accurate matching of features between samples, instruments, or datasets is a fundamental requirement for annotation, alignment, and statistical comparison.
+We can match two feature tables according to mz and retention time. In LC-MS-based metabolomics or proteomics, features (i.e., detected signals) are typically characterized by mass-to-charge ratio (m/z) and retention time (RT). Accurate matching of features between samples, instruments, or datasets is a fundamental requirement for annotation, alignment, and statistical comparison.
 
 The `mz_rt_match()` function performs feature-wise matching between two datasets (`data1` and `data2`) using both m/z and RT criteria, allowing users to define mass tolerance in ppm and RT tolerance either in absolute units or relative percentage.
 
@@ -182,8 +179,7 @@ cts.fiehnlab is <http://cts.fiehnlab.ucdavis.edu/service/convert>. It support a 
 library(masstools)
 ```
 
-We can use the `trans_id_database()` to get the databases that cts.fiehnlab.
-**Caution**: `trans_id_database` function temporarily can not be used.
+We can use the `trans_id_database()` to get the databases that cts.fiehnlab. **Caution**: `trans_id_database` function temporarily can not be used.
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE}
 database_name <- trans_id_database(server = "cts.fiehnlab")
@@ -276,7 +272,7 @@ trans_ID(
 
 Refer this publication: <https://jcheminf.biomedcentral.com/articles/10.1186/s13321-016-0174-y>
 
-The `get_compound_class()` function provides a convenient interface to query the ClassyFire database (https://classyfire.wishartlab.com), retrieving the chemical taxonomy and classification of a compound given its InChIKey. ClassyFire organizes chemical compounds into a structured taxonomy (Kingdom → Superclass → Class → Subclass...), and is widely used in cheminformatics, metabolomics, and compound annotation.
+The `get_compound_class()` function provides a convenient interface to query the ClassyFire database (<https://classyfire.wishartlab.com>), retrieving the chemical taxonomy and classification of a compound given its InChIKey. ClassyFire organizes chemical compounds into a structured taxonomy (Kingdom → Superclass → Class → Subclass...), and is widely used in cheminformatics, metabolomics, and compound annotation.
 
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE}
 result <- 
@@ -305,7 +301,6 @@ name_duplicated(c(rep(1, 5), 2))
 name_duplicated(1:5)
 ```
 
-
 ## Set working directory in `Windows`
 
 Copy the file path in `File explorer` in `Windows`.
@@ -317,7 +312,6 @@ setwd_win()
 ```
 
 Then paste the file path and type `Enter`.
-
 
 ## Check the operate system
 

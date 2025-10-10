@@ -2,11 +2,10 @@ Package: masstools
 Type: Package
 Title: A Collection of Useful Tools for Mass Spectrometry Data Processing and Analysis
 Version: 0.99.1
-Date: 2025-08-14
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
-           role = c("aut"),
+           role = c("aut","fnd"),
            email = "xiaotao.shen@outlook.com",
            comment = c(ORCID = "0000-0002-9608-9964")),
     person(given = "Chuchu",
@@ -26,8 +25,8 @@ biocViews: Metabolomics, MassSpectrometry, Preprocessing, Visualization
 URL: https://masstools.tidymass.org/
 BugReports: https://github.com/tidymass/masstools/issues
 Encoding: UTF-8
-LazyData: true
-Depends: R (>= 4.1)
+LazyData: false
+Depends: R (>= 4.5)
 License: MIT + file LICENSE
 Imports: 
     dplyr,
